@@ -13,25 +13,13 @@ public class ClientModel
     private int mobile;
     private int landLine;
 
-//    public ClientModel(String clientId, String firstName, String lastName, int mobile, int landLine, String email)
-//    {
-//        this.clientId = clientId;
-//        this.firstName = firstName;
-//        this.lastName = lastName;
-//        this.mobile = mobile;
-//        this.landLine = landLine;
-//        this.email = email;
-//    }
-
     public String getClientId() {
         return clientId;
     }
 
-
     public void setClientId(String clientId) {
         this.clientId = clientId;
     }
-
 
     public String getFirstName() {
         return firstName;

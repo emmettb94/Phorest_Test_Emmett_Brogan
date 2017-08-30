@@ -1,18 +1,10 @@
 package com.example.emmett.phorest_test_emmett_brogan;
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
-
-import org.w3c.dom.Text;
 
 /**
  * Created by Emmett Brogan on 30/08/2017.

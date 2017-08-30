@@ -42,8 +42,6 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity
 {
-    //TextView textForClients;
-    //Button getClientListButton;
 
     private String URL = "http://api-gateway-dev.phorest.com/third-party-api-server/api/business/eTC3QY5W3p_HmGHezKfxJw/client?size=20&page=0";
     private ListView clientList;
@@ -51,7 +49,6 @@ public class MainActivity extends AppCompatActivity
 
 /*
     public static final String BASE_URL = " http://api-gateway-dev.phorest.com/third-party-api-server/api/business/";
-    //http://api-gateway-dev.phorest.com/third-party-api-server/api/business/eTC3QY5W3p_HmGHezKfxJw/client?size=20&page=0
     */
     public String username = "global/cloud@apiexamples.com";
     public String password = "VMlRo/eh+Xd8M~l";
@@ -69,22 +66,6 @@ public class MainActivity extends AppCompatActivity
         dialog.setCancelable(false);
         dialog.setMessage("Loading Client List...");
 
-        /*
-
-        MIGHT NOT BE NEEDED!!! CHECK RESPONSE IN THEIR API SITE!!!
-
-        // Create default options which will be used for every
-        //  displayImage(...) call if no options will be passed to this method
-        DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
-                .cacheInMemory(true)
-                .cacheOnDisk(true)
-                .build();
-        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext())
-                .defaultDisplayImageOptions(defaultOptions)
-                .build();
-        ImageLoader.getInstance().init(config); // Do it on Application start
-        */
-
         clientList = (ListView)findViewById(R.id.clientList);
 
         new retrieveClientList().execute(URL);
@@ -93,7 +74,7 @@ public class MainActivity extends AppCompatActivity
         getClientListButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getData(BASE_URL, username, password);
+                new retrieveClientList().execute(URL);
                 Toast.makeText(getApplicationContext(),"Your message.", Toast.LENGTH_LONG).show();
 
             }
@@ -274,8 +255,6 @@ public class MainActivity extends AppCompatActivity
             holder.mobile.setText(clientModelList.get(position).getMobile());
             holder.landLine.setText(clientModelList.get(position).getLandLine());
 
-
-
             return convertView;
         }
 
@@ -291,129 +270,6 @@ public class MainActivity extends AppCompatActivity
         }
 
     }
-
-
-
-    /*
-    private class FetchWeatherData extends AsyncTask<Void, Void, String> {
-
-        @Override
-        protected String doInBackground(Void... params) {
-            // These two need to be declared outside the try/catch
-            // so that they can be closed in the finally block.
-            HttpURLConnection urlConnection = null;
-            BufferedReader reader = null;
-
-            // Will contain the raw JSON response as a string.
-            String forecastJsonStr = null;
-
-            try {
-                // Construct the URL for the OpenWeatherMap query
-                // Possible parameters are avaiable at OWM's forecast API page, at
-                // http://openweathermap.org/API#forecast
-                URL url = new URL("http://api.openweathermap.org/data/2.5/forecast/daily?q=94043&mode=json&units=metric&cnt=7&appid=2de143494c0b295cca9337e1e96b00e0");
-
-                // Create the request to OpenWeatherMap, and open the connection
-                urlConnection = (HttpURLConnection) url.openConnection();
-                urlConnection.setRequestMethod("GET");
-                urlConnection.connect();
-
-                // Read the input stream into a String
-                InputStream inputStream = urlConnection.getInputStream();
-                StringBuffer buffer = new StringBuffer();
-                if (inputStream == null) {
-                    // Nothing to do.
-                    return null;
-                }
-                reader = new BufferedReader(new InputStreamReader(inputStream));
-
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    // Since it's JSON, adding a newline isn't necessary (it won't affect parsing)
-                    // But it does make debugging a *lot* easier if you print out the completed
-                    // buffer for debugging.
-                    buffer.append(line + "\n");
-                }
-
-                if (buffer.length() == 0) {
-                    // Stream was empty.  No point in parsing.
-                    return null;
-                }
-                forecastJsonStr = buffer.toString();
-                return forecastJsonStr;
-            } catch (IOException e) {
-                Log.e("PlaceholderFragment", "Error ", e);
-                // If the code didn't successfully get the weather data, there's no point in attemping
-                // to parse it.
-                return null;
-            } finally{
-                if (urlConnection != null) {
-                    urlConnection.disconnect();
-                }
-                if (reader != null) {
-                    try {
-                        reader.close();
-                    } catch (final IOException e) {
-                        Log.e("PlaceholderFragment", "Error closing stream", e);
-                    }
-                }
-            }
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-            textForClients.setText(s);
-            Log.i("json", s);
-        }
-    }
-    */
-
-    /*
-    public static String getData(String uri, String userName, String userPassword) {
-        BufferedReader reader = null;
-        byte[] loginBytes = (userName + ":" + userPassword).getBytes();
-
-        StringBuilder loginBuilder = new StringBuilder()
-                .append("Basic ")
-                .append(Base64.encodeToString(loginBytes, Base64.DEFAULT));
-
-        try {
-            URL url = new URL(uri);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.addRequestProperty("Authorization", loginBuilder.toString());
-
-            StringBuilder sb = new StringBuilder();
-            reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            String line;
-            while ((line = reader.readLine())!= null){
-                sb.append(line);
-                sb.append("\n");
-            }
-
-            return  sb.toString();
-
-        } catch (Exception e)
-        {
-            e.printStackTrace();
-            return null;
-        }
-        finally
-        {
-            if (null != reader)
-            {
-                try
-                {
-                    reader.close();
-                }
-                catch (IOException e)
-                {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
