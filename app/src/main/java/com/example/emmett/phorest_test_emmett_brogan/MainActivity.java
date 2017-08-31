@@ -3,7 +3,6 @@ package com.example.emmett.phorest_test_emmett_brogan;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
@@ -47,6 +46,8 @@ public class MainActivity extends AppCompatActivity
     private ListView clientList;
     private ProgressDialog dialog;
 
+    private TextView textView;
+
 /*
     public static final String BASE_URL = " http://api-gateway-dev.phorest.com/third-party-api-server/api/business/";
     */
@@ -70,6 +71,8 @@ public class MainActivity extends AppCompatActivity
 
         new retrieveClientList().execute(URL);
 
+
+        //Get client list
         /*
         getClientListButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,6 +82,8 @@ public class MainActivity extends AppCompatActivity
 
             }
         });*/
+
+
     }
 
     public class retrieveClientList extends AsyncTask<String, String, List<ClientModel>>
@@ -124,7 +129,6 @@ public class MainActivity extends AppCompatActivity
                 String jsonData = stringBuffer.toString();
                 JSONObject jsonObject = new JSONObject(jsonData);
                 JSONArray jsonArray = jsonObject.getJSONArray("Client");
-                //JSONArray jsonArray = jsonObject.getJSONArray("content");
 
                 List<ClientModel> clientList = new ArrayList<>();
                 Gson gson = new Gson();
@@ -135,6 +139,7 @@ public class MainActivity extends AppCompatActivity
                     //gson useful as we can just use our model and it knows where to put the stuff we want
                     //instead of having to go in and set each one corresponding to our client model!
                     ClientModel clientModel = gson.fromJson(finalObject.toString(), ClientModel.class);
+
                     clientList.add(clientModel);
                 }
                 return clientList;
@@ -185,6 +190,7 @@ public class MainActivity extends AppCompatActivity
 
             if(resultClientModel != null)
             {
+                //Fill view
                 ClientAdapter adapter = new ClientAdapter(getApplicationContext(), R.layout.row, resultClientModel);
                 clientList.setAdapter(adapter);
                 clientList.setOnItemClickListener(new AdapterView.OnItemClickListener()
@@ -234,8 +240,8 @@ public class MainActivity extends AppCompatActivity
                 holder = new ViewHolder();
                 convertView = inflater.inflate(resource, null);
                 holder.clientId = (TextView)convertView.findViewById(R.id.clientId);
-                holder.firstName = (TextView)convertView.findViewById(R.id.name);
-                //holder.lastName = (TextView)convertView.findViewById(R.id.name);
+                holder.firstName = (TextView)convertView.findViewById(R.id.firstName);
+                holder.lastName = (TextView)convertView.findViewById(R.id.lastName);
                 holder.email = (TextView)convertView.findViewById(R.id.email);
                 holder.mobile = (TextView)convertView.findViewById(R.id.mobile);
                 holder.landLine = (TextView)convertView.findViewById(R.id.landLine);
@@ -250,7 +256,8 @@ public class MainActivity extends AppCompatActivity
             //Set text of textviews once you do ui stuff!!!
 
             holder.clientId.setText(clientModelList.get(position).getClientId());
-            holder.firstName.setText(clientModelList.get(position).getFirstName() + " " + clientModelList.get(position).getLastName());
+            holder.firstName.setText(clientModelList.get(position).getFirstName());
+            holder.lastName.setText(clientModelList.get(position).getLastName());
             holder.email.setText(clientModelList.get(position).getEmail());
             holder.mobile.setText(clientModelList.get(position).getMobile());
             holder.landLine.setText(clientModelList.get(position).getLandLine());
@@ -267,6 +274,7 @@ public class MainActivity extends AppCompatActivity
             private TextView email;
             private TextView mobile;
             private TextView landLine;
+
         }
 
     }
