@@ -32,8 +32,10 @@ public class ClientDetailsActivity extends ActionBarActivity {
 
             clientId = (TextView)findViewById(R.id.clientId);
             clientId.setText("Client ID: " + clientModel.getClientId());
-            firstName = (TextView)findViewById(R.id.name);
-            firstName.setText("Name: " + clientModel.getFirstName() + " " + clientModel.getLastName());
+            firstName = (TextView)findViewById(R.id.firstName);
+            firstName.setText("FirstName: " + clientModel.getFirstName());
+            lastName = (TextView)findViewById(R.id.lastName);
+            lastName.setText("LastName: " + clientModel.getFirstName());
             email = (TextView)findViewById(R.id.email);
             email.setText("Email: " + clientModel.getEmail());
             mobile = (TextView)findViewById(R.id.mobile);

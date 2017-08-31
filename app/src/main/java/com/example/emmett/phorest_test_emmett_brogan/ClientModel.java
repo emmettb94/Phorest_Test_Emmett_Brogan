@@ -10,8 +10,8 @@ public class ClientModel
     private String firstName;
     private String lastName;
     private String email;
-    private int mobile;
-    private int landLine;
+    private String mobile;
+    private String landLine;
 
     public String getClientId() {
         return clientId;
@@ -45,19 +45,19 @@ public class ClientModel
         this.email = email;
     }
 
-    public int getMobile() {
+    public String getMobile() {
         return mobile;
     }
 
-    public void setMobile(int mobile) {
+    public void setMobile(String mobile) {
         this.mobile = mobile;
     }
 
-    public int getLandLine() {
+    public String getLandLine() {
         return landLine;
     }
 
-    public void setLandLine(int landLine) {
+    public void setLandLine(String landLine) {
         this.landLine = landLine;
     }
 

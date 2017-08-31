@@ -6,9 +6,10 @@
     android:layout_height="match_parent"
     tools:context="com.example.emmett.phorest_test_emmett_brogan.MainActivity">
 
+
     <ListView
         android:id="@+id/clientList"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </android.widget.LinearLayout>
